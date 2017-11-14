@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Upwork Stack Overflow Challenge</h1>
+<form action="posts" method="post">
+    <div class="form-group" >
+        <label for="user_id">User ID</label>
+        <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="user_idHelp" placeholder="Enter User ID" value="{{ form.user_id.data if form.user_id.data != None else '' }}">
+        <small id="user_idHelp" class="form-text text-muted"> Stack Overflow User ID.</small>
+    </div>
+    {{ form.csrf_token }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,6 @@
+STACKEXCHANGE_BASE_URL = "https://api.stackexchange.com/"
+STACKEXCHANGE_API_KEY = ""
+REDIRECT_URI = "http://localhost:5000/myposts"
+CLIENT_ID = ""
+OAUTH_BASE_URL = "https://stackexchange.com/oauth"
+CLIENT_SECRET = ""
