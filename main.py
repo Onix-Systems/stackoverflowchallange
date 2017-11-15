@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from flask import Flask, render_template, request, redirect, session
-import requests
 from tools import make_request, build_auth_url, make_post_auth_url, make_get_user_request
 from forms import UserIdForm
 
@@ -70,7 +69,14 @@ def myposts():
     error, data = make_request(app, user_id)
     if error:
         app.logger.error(error)
-    return render_template('posts_list.html', data=data, user_id=user_id, page=1)
+
+    page_next = False
+    page_prev = False
+    if data['has_more']:
+        page_next = 2
+
+    return render_template('posts_list.html', data=data, user_id=user_id, page=1, page_next=page_next,
+                           page_prev=page_prev)
 
 
 @app.route('/logout')
