@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 from flask import Flask, render_template, request, redirect, session
-from tools import make_request, build_auth_url, make_post_auth_url, make_get_user_request
+from tools import make_request, build_auth_url, make_post_auth_url, \
+    make_get_user_request
 from forms import UserIdForm
 
 app = Flask(__name__, static_url_path='/static')
@@ -13,7 +14,6 @@ app.config.from_object('config')
 @app.route('/index.html')
 def index():
     app.logger.debug("Home page")
-    app.logger.debug(app.config['STACKEXCHANGE_BASE_URL'])
     return render_template('index.html')
 
 
@@ -40,7 +40,8 @@ def posts():
             page_next = int(page) + 1
         if int(page) > 1:
             page_prev = int(page) - 1
-        return render_template('posts_list.html', data=data, user_id=user_id, page=page, page_next=page_next,
+        return render_template('posts_list.html', data=data, user_id=user_id,
+                               page=page, page_next=page_next,
                                page_prev=page_prev)
 
 
@@ -75,14 +76,15 @@ def myposts():
     if data['has_more']:
         page_next = 2
 
-    return render_template('posts_list.html', data=data, user_id=user_id, page=1, page_next=page_next,
-                           page_prev=page_prev)
+    return render_template('posts_list.html', data=data, user_id=user_id,
+                           page=1, page_next=page_next, page_prev=page_prev)
 
 
 @app.route('/logout')
 def logout():
     session.pop('user_id')
     return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)

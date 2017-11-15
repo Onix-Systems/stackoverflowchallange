@@ -1,4 +1,3 @@
 Flask
-simplejson
 futures
 flask-wtf
